@@ -6,7 +6,7 @@ import type { DeathmodeI18nMode, DeathmodeLocale, NormalizedDeathmodeLocale } fr
 const zhCN = {
   common: { processing: '处理中' },
   dashboard: {
-    sidebar: { dashboard: '控制台', recentBattles: '最近战斗' },
+    sidebar: { dashboard: '控制台', overview: '备战室', deathmatch: '死斗模式', characters: '角色列表', recentBattles: '最近战斗' },
     mode: { deathmatch: '死斗' },
     battleType: { practice: '练习赛', ranked: '排位赛' },
     status: { pending: '等待中', running: '进行中', done: '已完成', error: '异常', canceled: '已取消' },
@@ -33,6 +33,28 @@ const zhCN = {
       loadMore: '加载更多', loadingMore: '加载中',
       loadingTexts: ['正在读取最近的对战记录', '按时间整理战斗轨迹', '同步排位和练习赛结果', '确认哪些战斗已经生成战斗回放']
     },
+    modePage: {
+      breadcrumbAria: '备战室位置导航',
+      charactersCopy: '按最近有效参战时间排列。提交中的版本和需要处理的失败提交会单独显示，不会混入稳定状态。',
+      compiling: '正在编译',
+      status: '状态',
+      record: '排位胜/平/负',
+      unknownModel: '未标注模型'
+    },
+    attention: { title: '需要处理' },
+    submission: {
+      pending_compile: '等待编译', compiling: '编译中', compile_failed: '编译失败', rejected: '已拒绝'
+    },
+    remediation: {
+      status: {
+        name_violation: '名称待整改', description_violation: '简介待整改', all_violation: '资料待整改', suspended: '已停用'
+      }
+    },
+    characters: {
+      create: '新建角色', openDetail: '查看角色 {{name}}', empty: '还没有死斗角色。创建角色后就可以提交 Agent 并开始对战。'
+    },
+    codeSource: { default: '默认 Agent' },
+    stats: { rating: '积分' },
     error: { retry: '重新加载' }
   },
   battleMap: {
@@ -43,6 +65,7 @@ const zhCN = {
       thicket_maze: '拥有密集草丛和狭窄路线的死斗地图。', four_corners_ruins: '四角遗迹围绕中央区域展开的死斗地图。'
     } }
   },
+  replay: { class: { warrior: '战士', mage: '法师', hunter: '猎人' } },
   characters: {
     create: {
       pageAria: '新建死斗角色', breadcrumbAria: '新建角色导航', loading: '正在读取角色槽位和职业列表',
@@ -109,7 +132,7 @@ const zhCN = {
 const enUS = {
   common: { processing: 'Processing' },
   dashboard: {
-    sidebar: { dashboard: 'Dashboard', recentBattles: 'Recent battles' }, mode: { deathmatch: 'Deathmatch' },
+    sidebar: { dashboard: 'Dashboard', overview: 'Overview', deathmatch: 'Deathmatch', characters: 'Character list', recentBattles: 'Recent battles' }, mode: { deathmatch: 'Deathmatch' },
     battleType: { practice: 'Practice', ranked: 'Ranked' },
     status: { pending: 'Pending', running: 'Running', done: 'Done', error: 'Error', canceled: 'Canceled' },
     result: { win: 'Win', loss: 'Loss', draw: 'Draw', unresolved: 'Unresolved' }, active: { waiting: 'Waiting' },
@@ -124,9 +147,32 @@ const enUS = {
       clearFilters: 'Clear all', applyFilters: 'Apply', cancelFilters: 'Cancel', removeFilter: 'Remove {{label}}', loadFailed: 'Battle records could not load. Try again later.',
       empty: 'No battle records yet. Start a practice or ranked battle to see it here.', emptyFiltered: 'No battle records match the current filters.',
       loadMore: 'Load more', loadingMore: 'Loading', loadingTexts: ['Reading recent battle records', 'Sorting battle traces by time', 'Syncing ranked and practice results', 'Checking which battles have replays']
-    }, error: { retry: 'Reload' }
+    },
+    modePage: {
+      breadcrumbAria: 'Dashboard location navigation',
+      charactersCopy: 'Ordered by last valid participation. In-progress and actionable failed submissions are kept outside stable rows.',
+      compiling: 'Compiling', status: 'Status', record: 'Ranked W / D / L', unknownModel: 'Unspecified model'
+    },
+    attention: { title: 'Needs attention' },
+    submission: {
+      pending_compile: 'Waiting to compile', compiling: 'Compiling', compile_failed: 'Compilation failed', rejected: 'Rejected'
+    },
+    remediation: {
+      status: {
+        name_violation: 'Name change required', description_violation: 'Description change required',
+        all_violation: 'Profile changes required', suspended: 'Suspended'
+      }
+    },
+    characters: {
+      create: 'New character', openDetail: 'View character {{name}}',
+      empty: 'No deathmatch characters yet. Create one to submit an Agent and start battles.'
+    },
+    codeSource: { default: 'Default Agent' },
+    stats: { rating: 'Rating' },
+    error: { retry: 'Reload' }
   },
   battleMap: { previewUnavailable: 'Map preview is unavailable.', names: { default_arena: 'Basic Map', reedbank_ruins: 'Reedbank Ruins', thicket_maze: 'Thicket Maze', four_corners_ruins: 'Four Corners Ruins' }, descriptions: { deathmatch: { default_arena: 'An open basic deathmatch map.', reedbank_ruins: 'A deathmatch map with banks, ruins, and brush.', thicket_maze: 'A deathmatch map with dense brush and narrow routes.', four_corners_ruins: 'A deathmatch map built around four corner ruins.' } } },
+  replay: { class: { warrior: 'Warrior', mage: 'Mage', hunter: 'Hunter' } },
   characters: {
     create: {
       pageAria: 'New deathmatch character', breadcrumbAria: 'New character navigation', loading: 'Loading character slots and classes', kicker: 'deathmatch setup',

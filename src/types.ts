@@ -119,6 +119,7 @@ export interface DeathmatchRecentBattlesDataSource {
 }
 
 export interface DeathmodeLinkProps {
+  'aria-label'?: string;
   children: ReactNode;
   className?: string;
   href: string;
@@ -158,6 +159,44 @@ export interface AgentDuelDeathmatchRecentBattlesProps extends DeathmodeModulePr
   getReplayHref?(battle: DeathmatchBattle): string | null;
   getRevengeHref?(battle: DeathmatchBattle, ownCharacterPublicId: string): string | null;
 }
+
+export type CharacterListSubmissionStatus = 'pending_compile' | 'compiling' | 'compile_failed' | 'rejected';
+
+export interface CharacterListLatestSubmission {
+  version_no: number;
+  status: CharacterListSubmissionStatus;
+}
+
+export interface CharacterListActiveCode {
+  version_no: number;
+  ai_model: string | null;
+}
+
+export interface CharacterListRankedResults {
+  wins: number;
+  draws: number;
+  losses: number;
+}
+
+export interface DeathmatchCharacterListItem {
+  public_id: string;
+  name: string;
+  status?: ContentStatus;
+  class_id: CharacterClassId;
+  created_at: string;
+  active_code: CharacterListActiveCode | null;
+  ranked_rating: number;
+  ranked_results: CharacterListRankedResults;
+  latest_submission: CharacterListLatestSubmission | null;
+}
+
+export type AgentDuelCharacterListProps = Omit<DeathmodeModuleProps, 'onUnauthorized'> & {
+  characters: DeathmatchCharacterListItem[];
+  createCharacterHref?: string;
+  dashboardHref?: string;
+  getCharacterHref?(characterPublicId: string): string;
+  renderAiModel?(aiModel: string | null, fallbackLabel: string): ReactNode;
+};
 
 export class DeathmodeApiError extends Error {
   readonly status: number;

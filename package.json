@@ -1,6 +1,6 @@
 {
   "name": "@agentduel/deathmode",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Reusable AgentDuel deathmatch character and battle modules for React applications",
   "license": "Apache-2.0",
   "type": "module",
@@ -19,6 +19,10 @@
     "./character-edit": {
       "types": "./dist/character-edit.d.ts",
       "import": "./dist/character-edit.js"
+    },
+    "./character-list": {
+      "types": "./dist/character-list.d.ts",
+      "import": "./dist/character-list.js"
     },
     "./recent-battles": {
       "types": "./dist/recent-battles.d.ts",

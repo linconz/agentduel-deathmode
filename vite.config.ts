@@ -11,6 +11,7 @@ export default defineConfig({
         index: resolve(import.meta.dirname, 'src/index.ts'),
         'character-create': resolve(import.meta.dirname, 'src/character-create.ts'),
         'character-edit': resolve(import.meta.dirname, 'src/character-edit.ts'),
+        'character-list': resolve(import.meta.dirname, 'src/character-list.ts'),
         'recent-battles': resolve(import.meta.dirname, 'src/recent-battles.ts')
       },
       formats: ['es'],
