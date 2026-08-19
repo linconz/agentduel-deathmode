@@ -73,15 +73,20 @@
 
 .character-detail-edit-link {
   display: grid;
+  flex: 0 0 34px;
+  box-sizing: border-box;
+  position: relative;
   width: 34px;
   height: 34px;
+  padding: 0;
   place-items: center;
+  line-height: 1;
   color: var(--duel-muted);
   text-decoration: none;
   border: 1px solid var(--duel-line);
   border-radius: var(--duel-radius-xs);
 }
-.character-detail-edit-link svg { width: 16px; height: 16px; }
+.character-detail-edit-link svg { display: block; position: absolute; top: 50%; left: 50%; width: 16px; height: 16px; margin: 0; transform: translate(-50%, -50%); }
 
 .character-detail-battle-launch,
 .character-detail-guest-action {
