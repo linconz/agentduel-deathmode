@@ -144,7 +144,6 @@ export interface AgentDuelCharacterCreateProps extends DeathmodeModuleProps {
 }
 
 export interface AgentDuelCharacterEditProps extends DeathmodeModuleProps {
-  dashboardHref?: string;
   characterDetailHref?(characterPublicId: string): string;
   characterPublicId: string;
   dataSource: CharacterEditDataSource;
@@ -153,7 +152,6 @@ export interface AgentDuelCharacterEditProps extends DeathmodeModuleProps {
 
 export interface AgentDuelDeathmatchRecentBattlesProps extends DeathmodeModuleProps {
   assetBaseUrl?: string;
-  dashboardHref?: string;
   dataSource: DeathmatchRecentBattlesDataSource;
   getCharacterHref?(characterPublicId: string, view: 'owned' | 'public'): string | null;
   getReplayHref?(battle: DeathmatchBattle): string | null;
@@ -193,10 +191,108 @@ export interface DeathmatchCharacterListItem {
 export type AgentDuelCharacterListProps = Omit<DeathmodeModuleProps, 'onUnauthorized'> & {
   characters: DeathmatchCharacterListItem[];
   createCharacterHref?: string;
-  dashboardHref?: string;
   getCharacterHref?(characterPublicId: string): string;
   renderAiModel?(aiModel: string | null, fallbackLabel: string): ReactNode;
 };
+
+export type CharacterDetailSectionStatus = 'idle' | 'loading' | 'ready' | 'error';
+export type CharacterDetailOptimizationTab = 'auto' | 'manual';
+export type CharacterCodeSourceKind = 'default' | 'custom';
+export type CharacterCodeVersionStatus = 'pending_compile' | 'compiling' | 'compiled' | 'compile_failed' | 'rejected';
+
+export interface CharacterDetailOwnerProfile {
+  public_id: string;
+  slot_no: number;
+  name: string;
+  description: string | null;
+  status: ContentStatus;
+  class_id: CharacterClassId;
+  api_key: string;
+  code_source: CharacterCodeSourceKind;
+  ranked_rating: number;
+  ranked_matches: number;
+  ranked_wins: number;
+  ranked_losses: number;
+  ranked_draws: number;
+  updated_at: string;
+}
+
+export interface CharacterDetailGuestProfile {
+  name: string;
+  description: string | null;
+  class_id: CharacterClassId;
+  ranked_rating: number;
+  ranked_wins: number;
+  ranked_draws: number;
+  ranked_losses: number;
+}
+
+export interface CharacterCodeDiagnostic {
+  stage: string;
+  code: string | null;
+  message: string;
+  line: number | null;
+  column: number | null;
+}
+
+export interface CharacterDetailCodeVersion {
+  public_id: string;
+  version_no: number;
+  status: CharacterCodeVersionStatus;
+  diagnostics: CharacterCodeDiagnostic[];
+  ai_model: string | null;
+  change_summary: string | null;
+  completed_at: string | null;
+  created_at: string;
+  is_current: boolean;
+  is_available: boolean;
+}
+
+export interface CharacterDetailCodeVersions {
+  compiled_versions: CharacterDetailCodeVersion[];
+  latest_submission: CharacterDetailCodeVersion | null;
+}
+
+export interface CharacterDetailGuestVersion {
+  version_no: number;
+  ai_model: string | null;
+  change_summary: string | null;
+}
+
+export interface CharacterDetailCodeEditorProps {
+  ariaLabel: string;
+  onChange(sourceCode: string): void;
+  readOnly: boolean;
+  value: string;
+}
+
+export interface CharacterDetailBattleParticipant {
+  side: BattleSide;
+  kind: 'character';
+  public_id: string;
+  name: string;
+  name_redacted?: boolean;
+  rating_delta: number | null;
+}
+
+export interface CharacterDetailBattle {
+  public_id: string;
+  share_path: string | null;
+  battle_type: BattleType;
+  match_source?: 'practice_random' | 'direct_challenge' | 'ranked_matchmaking';
+  viewer_match_role?: 'initiator' | 'matched' | null;
+  challenge_role?: BattleChallengeRole | null;
+  can_revenge?: boolean;
+  game_mode_id: 'deathmatch';
+  map_id: string;
+  status: BattleStatus;
+  participants: CharacterDetailBattleParticipant[];
+  winner_side: BattleSide | 'draw' | null;
+  replay_available: boolean;
+  created_at: string;
+}
+
+export type CharacterDetailBaseProps = Omit<DeathmodeModuleProps, 'onUnauthorized'>;
 
 export class DeathmodeApiError extends Error {
   readonly status: number;

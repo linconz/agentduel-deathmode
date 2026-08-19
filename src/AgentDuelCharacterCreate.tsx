@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Breadcrumbs, Button, ButtonLink } from './components';
+import { Button, ButtonLink } from './components';
 import {
   createCharacterClassOptions,
   getCharacterNameHelpParams,
@@ -117,11 +117,6 @@ function CharacterCreateContent({
       ) : null}
       {status === 'ready' && context ? (
         <>
-          <Breadcrumbs
-            ariaLabel={t('characters.create.breadcrumbAria')}
-            items={[{ label: t('dashboard.sidebar.dashboard'), href: backToDashboardHref }, { label: t('characters.create.title') }]}
-            linkComponent={linkComponent}
-          />
           <section className="character-create-hero" aria-labelledby="character-create-title">
             <div>
               <p className="dashboard-kicker">{t('characters.create.kicker')}</p>

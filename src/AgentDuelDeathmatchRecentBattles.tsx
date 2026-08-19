@@ -1,3 +1,4 @@
+import { AgentDuelBattleMatchLabelBadge } from '@agentduel/component';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -12,7 +13,7 @@ import {
   type BattleRecordFilterOption,
   type DeathmatchBattleRecordRow
 } from './battleModel';
-import { Breadcrumbs, Button, ButtonLink } from './components';
+import { Button, ButtonLink } from './components';
 import { joinAssetUrl } from './characterModel';
 import { DeathmodeI18nBoundary, normalizeLocale } from './i18n';
 import type {
@@ -57,7 +58,6 @@ export function AgentDuelDeathmatchRecentBattles(props: AgentDuelDeathmatchRecen
 function DeathmatchRecentBattlesContent({
   assetBaseUrl = 'https://www.agentduel.app',
   className,
-  dashboardHref = '/dashboard',
   dataSource,
   getCharacterHref,
   getReplayHref,
@@ -173,7 +173,6 @@ function DeathmatchRecentBattlesContent({
       {contextStatus === 'ready' ? (
         <BattleRecordsView
           assetBaseUrl={assetBaseUrl}
-          dashboardHref={dashboardHref}
           dateFormatter={dateFormatter}
           filters={filters}
           linkComponent={linkComponent}
@@ -192,7 +191,6 @@ function DeathmatchRecentBattlesContent({
 
 function BattleRecordsView({
   assetBaseUrl,
-  dashboardHref,
   dateFormatter,
   filters,
   linkComponent,
@@ -205,7 +203,6 @@ function BattleRecordsView({
   rows
 }: {
   assetBaseUrl: string;
-  dashboardHref: string;
   dateFormatter: Intl.DateTimeFormat;
   filters: DeathmatchBattleRecordFilters;
   linkComponent?: DeathmodeLinkComponent;
@@ -228,11 +225,6 @@ function BattleRecordsView({
 
   return (
     <>
-      <Breadcrumbs
-        ariaLabel={t('dashboard.records.pageAria')}
-        items={[{ href: dashboardHref, label: t('dashboard.sidebar.dashboard') }, { label: t('dashboard.sidebar.recentBattles') }]}
-        linkComponent={linkComponent}
-      />
       <section className="battle-records-hero" aria-labelledby="battle-records-title">
         <p className="dashboard-kicker">{t('dashboard.records.kicker')}</p>
         <h1 id="battle-records-title">{t('dashboard.records.modeTitle', { mode: t('dashboard.mode.deathmatch') })}</h1>
@@ -415,7 +407,11 @@ function BattleRecordRow({
         {row.challengeRole && row.challengeLabelKey ? (
           <MetaFilter active={filters.challengeRoles.includes(row.challengeRole)} label={t(row.challengeLabelKey)} onClick={() => onAddFilter({ kind: 'challengeRole', value: row.challengeRole! })} />
         ) : row.matchLabelKey && row.matchLabelTone && row.matchLabelTooltipKey ? (
-          <span className={`battle-match-label is-${row.matchLabelTone}`} title={t(row.matchLabelTooltipKey)}>{t(row.matchLabelKey)}</span>
+          <AgentDuelBattleMatchLabelBadge
+            label={t(row.matchLabelKey)}
+            tone={row.matchLabelTone}
+            tooltip={t(row.matchLabelTooltipKey)}
+          />
         ) : null}
         {resultFilter === null ? (
           <strong className={`is-${row.result}`}>{t(`dashboard.result.${row.result}`)}</strong>

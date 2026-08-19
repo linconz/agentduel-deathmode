@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useState, type FormEvent } from 'react';
+import { useCallback, useEffect, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Breadcrumbs, Button, ButtonLink } from './components';
+import { Button, ButtonLink } from './components';
 import { createCharacterUpdateInput, getCharacterEditFormState } from './characterEditModel';
 import { DeathmodeI18nBoundary, normalizeLocale } from './i18n';
 import type { AgentDuelCharacterEditProps, DeathmatchCharacter } from './types';
@@ -22,7 +22,6 @@ function CharacterEditContent({
   characterDetailHref = (publicId) => `/characters/${publicId}`,
   characterPublicId,
   className,
-  dashboardHref = '/dashboard',
   dataSource,
   linkComponent,
   normalizedLocale,
@@ -112,7 +111,6 @@ function CharacterEditContent({
       <CharacterEditForm
         character={character}
         characterDetailHref={characterDetailHref(character.public_id)}
-        dashboardHref={dashboardHref}
         description={description}
         formError={formError}
         isSaving={isSaving}
@@ -129,7 +127,6 @@ function CharacterEditContent({
 function CharacterEditForm({
   character,
   characterDetailHref,
-  dashboardHref,
   description,
   formError,
   isSaving,
@@ -141,7 +138,6 @@ function CharacterEditForm({
 }: {
   character: DeathmatchCharacter;
   characterDetailHref: string;
-  dashboardHref: string;
   description: string;
   formError: string | null;
   isSaving: boolean;
@@ -152,11 +148,6 @@ function CharacterEditForm({
   onSubmit(event: FormEvent<HTMLFormElement>): void;
 }) {
   const { t } = useTranslation();
-  const breadcrumbs = useMemo(() => [
-    { label: t('dashboard.sidebar.dashboard'), href: dashboardHref },
-    { label: character.name, href: characterDetailHref },
-    { label: t('characters.edit.title') }
-  ], [character.name, characterDetailHref, dashboardHref, t]);
   const {
     hasRequiredChange,
     isDescriptionInvalid,
@@ -167,7 +158,6 @@ function CharacterEditForm({
 
   return (
     <>
-      <Breadcrumbs ariaLabel={t('characters.edit.breadcrumbAria')} items={breadcrumbs} linkComponent={linkComponent} />
       <section className="character-detail-hero" aria-labelledby="character-edit-title">
         <div>
           <p className="dashboard-kicker">{t('characters.edit.kicker')}</p>

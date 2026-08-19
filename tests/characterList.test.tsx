@@ -38,6 +38,21 @@ describe('AgentDuelCharacterList', () => {
     expect(html).toContain('3/1/2');
     expect(html).toContain('900');
     expect(html).toContain('aria-label="查看角色 Cold Start"');
+    expect(html).not.toContain('duel-breadcrumbs');
+  });
+
+  it('leaves breadcrumb navigation to the host page', () => {
+    const packageRoot = resolve(import.meta.dirname, '..');
+    const componentSources = [
+      'src/AgentDuelCharacterCreate.tsx',
+      'src/AgentDuelCharacterEdit.tsx',
+      'src/AgentDuelCharacterList.tsx',
+      'src/AgentDuelDeathmatchRecentBattles.tsx'
+    ].map((file) => readFileSync(resolve(packageRoot, file), 'utf8'));
+    const styles = readFileSync(resolve(packageRoot, 'src/styles.css'), 'utf8');
+
+    expect(componentSources.join('\n')).not.toContain('Breadcrumbs');
+    expect(styles).not.toContain('.duel-breadcrumbs');
   });
 
   it('does not promote an older failed submission into the attention section', () => {
@@ -57,3 +72,5 @@ describe('AgentDuelCharacterList', () => {
     expect(html).toContain('Unspecified model');
   });
 });
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';

@@ -1,6 +1,6 @@
 {
   "name": "@agentduel/deathmode",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Reusable AgentDuel deathmatch character and battle modules for React applications",
   "license": "Apache-2.0",
   "type": "module",
@@ -24,11 +24,15 @@
       "types": "./dist/character-list.d.ts",
       "import": "./dist/character-list.js"
     },
+    "./character-detail": {
+      "types": "./dist/character-detail.d.ts",
+      "import": "./dist/character-detail.js"
+    },
     "./recent-battles": {
       "types": "./dist/recent-battles.d.ts",
       "import": "./dist/recent-battles.js"
     },
-    "./styles.css": "./dist/assets/agentduel-deathmode.css"
+    "./styles.css": "./dist/assets/styles.css"
   },
   "files": [
     "dist",
@@ -53,6 +57,7 @@
     "react-dom": ">=18.2.0"
   },
   "dependencies": {
+    "@agentduel/component": "^0.1.0",
     "i18next": "^26.3.2",
     "react-i18next": "^17.0.8"
   },
@@ -66,6 +71,7 @@
     "react-dom": "^19.2.7",
     "typescript": "^6.0.3",
     "vite": "^6.3.5",
+    "vite-plugin-lib-inject-css": "^2.2.2",
     "vitest": "^3.2.4"
   },
   "engines": {

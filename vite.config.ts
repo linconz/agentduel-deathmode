@@ -1,9 +1,10 @@
 import { resolve } from 'node:path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), libInjectCss()],
   build: {
     emptyOutDir: false,
     lib: {
@@ -12,6 +13,7 @@ export default defineConfig({
         'character-create': resolve(import.meta.dirname, 'src/character-create.ts'),
         'character-edit': resolve(import.meta.dirname, 'src/character-edit.ts'),
         'character-list': resolve(import.meta.dirname, 'src/character-list.ts'),
+        'character-detail': resolve(import.meta.dirname, 'src/character-detail.ts'),
         'recent-battles': resolve(import.meta.dirname, 'src/recent-battles.ts')
       },
       formats: ['es'],
@@ -19,6 +21,7 @@ export default defineConfig({
     },
     rollupOptions: {
       external: [
+        '@agentduel/component',
         'i18next',
         'react',
         'react-dom',

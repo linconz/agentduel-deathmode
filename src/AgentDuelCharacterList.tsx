@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Breadcrumbs, ButtonLink, DefaultLink } from './components';
+import { ButtonLink, DefaultLink } from './components';
 import { DeathmodeI18nBoundary, normalizeLocale } from './i18n';
 import type {
   AgentDuelCharacterListProps,
@@ -23,7 +23,6 @@ function CharacterListContent({
   characters,
   className,
   createCharacterHref = '/characters/new',
-  dashboardHref = '/dashboard',
   getCharacterHref = defaultCharacterHref,
   linkComponent,
   normalizedLocale,
@@ -37,15 +36,6 @@ function CharacterListContent({
 
   return (
     <div className={rootClassName} style={style}>
-      <Breadcrumbs
-        ariaLabel={t('dashboard.modePage.breadcrumbAria')}
-        items={[
-          { href: dashboardHref, label: t('dashboard.sidebar.overview') },
-          { label: t('dashboard.sidebar.deathmatch') },
-          { label: t('dashboard.sidebar.characters') }
-        ]}
-        linkComponent={linkComponent}
-      />
       <section className="mode-list-heading" aria-labelledby="deathmode-character-list-title">
         <div>
           <p className="dashboard-kicker">{t('dashboard.sidebar.deathmatch')}</p>

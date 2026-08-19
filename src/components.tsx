@@ -6,33 +6,6 @@ export function DefaultLink({ children, ...props }: DeathmodeLinkProps) {
   return <a {...props}>{children}</a>;
 }
 
-export function Breadcrumbs({
-  ariaLabel,
-  items,
-  linkComponent: Link = DefaultLink
-}: {
-  ariaLabel: string;
-  items: Array<{ href?: string; label: string }>;
-  linkComponent?: DeathmodeLinkComponent;
-}) {
-  return (
-    <nav className="duel-breadcrumbs" aria-label={ariaLabel}>
-      <ol>
-        {items.map((item, index) => {
-          const current = index === items.length - 1;
-          return (
-            <li key={`${item.label}-${index}`}>
-              {item.href && !current
-                ? <Link href={item.href}>{item.label}</Link>
-                : <span aria-current={current ? 'page' : undefined}>{item.label}</span>}
-            </li>
-          );
-        })}
-      </ol>
-    </nav>
-  );
-}
-
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   loading?: boolean;
