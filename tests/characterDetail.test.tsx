@@ -1,5 +1,6 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   AgentDuelCharacterGuestBasic,
@@ -35,6 +36,7 @@ describe('character detail sections', () => {
     expect(html).toContain('/challenge');
     expect(html).toContain('920');
     expect(html).toContain('Challenge');
+    expect(html).toContain('character-detail-battle-button');
   });
 
   it('uses a host editor and host-generated battle links', () => {
@@ -42,7 +44,7 @@ describe('character detail sections', () => {
       activeTab: 'manual', apiKey: 'secret-key', apiKeyError: null, apiKeyVisible: false,
       copiedApiKey: false, copiedPrompt: false, isRotatingApiKey: false, isSubmitting: false,
       manualSourceCode: 'export default 1', manualSubmitError: null, manualSubmitNotice: null,
-      prompt: 'Prompt', sourceStatus: 'ready', locale: 'en-US',
+      prompt: 'First line\nSecond line', sourceStatus: 'ready', locale: 'en-US',
       onCopyApiKey: () => undefined, onCopyPrompt: () => undefined,
       onManualSourceCodeChange: () => undefined, onRotateApiKey: () => undefined,
       onSubmitManualCode: () => undefined, onTabChange: () => undefined, onToggleApiKey: () => undefined,
@@ -60,7 +62,7 @@ describe('character detail sections', () => {
           { side: 'blue', kind: 'character', public_id: 'character-2', name: 'Beta', rating_delta: null }
         ]
       }],
-      error: null, hasMore: false, ownerCharacterPublicId: 'character-1', status: 'ready',
+      error: null, hasMore: true, ownerCharacterPublicId: 'character-1', status: 'ready',
       getCharacterHref: (publicId) => `/characters/${publicId}`,
       getReplayHref: () => '/replays/one', getRevengeHref: () => '/revenge/one',
       onLoadMore: () => undefined
@@ -68,6 +70,10 @@ describe('character detail sections', () => {
     expect(battleHtml).toContain('/characters/character-2');
     expect(battleHtml).toContain('/replays/one');
     expect(battleHtml).toContain('/revenge/one');
+    expect(battleHtml).toContain('dashboard-battle-row battle-record-row');
+    expect(battleHtml).toContain('battle-map-label');
+    expect(battleHtml).toContain('battle-map-tooltip');
+    expect(battleHtml).toContain('character-battle-record-actions');
   });
 
   it('caps available versions at ten newest records', () => {
@@ -83,5 +89,18 @@ describe('character detail sections', () => {
     expect((html.match(/character-detail-version-card/g) ?? []).length).toBe(10);
     expect(html).toContain('Summary 12');
     expect(html).not.toContain('>Summary 1<');
+    expect(html).not.toContain('可用版本');
+  });
+
+  it('keeps prompt line breaks and fixes only the manual editor at 400px', () => {
+    const styles = readFileSync(new URL('../src/styles.css', import.meta.url), 'utf8');
+    expect(styles).toMatch(/\.character-detail-prompt\s*\{[^}]*white-space:\s*pre-wrap/s);
+    expect(styles).toMatch(/\.character-detail-code-editor\s*\{[^}]*height:\s*400px/s);
+  });
+
+  it('keeps the guest challenge link the same compact brown button as start battle', () => {
+    const styles = readFileSync(new URL('../src/styles.css', import.meta.url), 'utf8');
+    expect(styles).toMatch(/\.character-detail-guest-action\s*\{[^}]*width:\s*max-content[^}]*min-width:\s*0/s);
+    expect(styles).toMatch(/\.character-detail-guest-action\s*>\s*a\.duel-button\.character-detail-battle-button\s*\{[^}]*width:\s*auto[^}]*color:\s*var\(--duel-surface\)/s);
   });
 });

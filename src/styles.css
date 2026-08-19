@@ -233,9 +233,7 @@
 
 .character-detail-prompt,
 .character-detail-code-editor {
-  min-height: 320px;
   margin: 0;
-  overflow: auto;
   color: var(--duel-text);
   background: var(--duel-surface-soft);
   border: 1px solid var(--duel-line);
@@ -245,15 +243,30 @@
 
 .character-detail-prompt {
   padding: 16px;
+  overflow: auto;
   white-space: pre-wrap;
   font: 13px/21px var(--duel-font-code);
 }
 
+.character-detail-code-editor {
+  height: 400px;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.character-detail-code-editor > *,
+.character-detail-code-editor > .character-source-code-shell {
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+}
+
 .character-detail-code-editor textarea {
   width: 100%;
-  min-height: 320px;
+  height: 100%;
+  min-height: 0;
   padding: 14px;
-  resize: vertical;
+  resize: none;
   border: 0;
   box-sizing: border-box;
   font: 13px/21px var(--duel-font-code);
@@ -922,10 +935,13 @@
 /* Owner detail sections retain the original AgentDuel FrontEnd presentation. */
 .agentduel-deathmode { --duel-brown: #7a4b22; --duel-brown-soft: #f6ede5; }
 .character-detail-battle-launch { width: max-content; min-width: 0; justify-items: end; }
+.character-detail-guest-action { width: max-content; min-width: 0; justify-items: end; }
 .character-detail-battle-tabs { display: inline-flex; gap: 4px; padding: 3px; background: transparent; border: 1px solid color-mix(in srgb, var(--duel-brown) 42%, var(--duel-line)); border-radius: 8px; }
 .character-detail-battle-tabs button { flex: 0 0 auto; min-height: 32px; padding: 0 12px; color: var(--duel-brown); font: inherit; font-size: 13px; line-height: 18px; font-weight: 700; background: transparent; border: 0; border-radius: 6px; }
 .character-detail-battle-tabs button[aria-selected="true"] { color: var(--duel-surface); background: var(--duel-brown); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--duel-brown) 24%, var(--duel-line-strong)); }
 .duel-button.character-detail-battle-button { min-height: 42px; padding: 0 16px; color: var(--duel-surface); font: 700 14px/20px var(--duel-font-body); background: var(--duel-brown); border: 1px solid var(--duel-brown); border-radius: 8px; }
+.character-detail-guest-action > a.duel-button.character-detail-battle-button { width: auto; color: var(--duel-surface); text-decoration: none; }
+.character-detail-guest-action > a.duel-button.character-detail-battle-button > .duel-button-label { color: inherit; }
 .duel-button.character-detail-battle-button:hover:not(:disabled) { color: var(--duel-surface); background: color-mix(in srgb, var(--duel-brown) 88%, var(--duel-ink)); border-color: var(--duel-brown); }
 .duel-button.character-detail-battle-button:disabled { color: var(--duel-muted); background: var(--duel-surface-soft); border-color: var(--duel-line-strong); }
 
@@ -970,6 +986,8 @@
 
 @media (max-width: 900px) {
   .character-detail-battle-launch { width: 100%; justify-items: stretch; }
+  .character-detail-guest-action { width: 100%; justify-items: stretch; }
+  .character-detail-guest-action > a.duel-button.character-detail-battle-button { width: 100%; }
   .character-detail-code-layout { grid-template-columns: 1fr; }
   .character-detail-version-grid { grid-template-columns: repeat(auto-fill, 160px); }
 }
