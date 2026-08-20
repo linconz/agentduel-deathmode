@@ -13,8 +13,8 @@ import {
   type BattleRecordFilterOption,
   type DeathmatchBattleRecordRow
 } from './battleModel';
+import { BattleDateMapMeta } from './BattleDateMapMeta';
 import { Button, ButtonLink } from './components';
-import { joinAssetUrl } from './characterModel';
 import { DeathmodeI18nBoundary, normalizeLocale } from './i18n';
 import type {
   AgentDuelDeathmatchRecentBattlesProps,
@@ -38,13 +38,6 @@ const FILTER_OPTIONS: BattleRecordFilterOption[] = [
   { kind: 'result', value: 'loss' },
   { kind: 'result', value: 'win' }
 ];
-
-const MAP_THUMBNAILS: Readonly<Record<string, { path: string; width: number; height: number }>> = {
-  default_arena: { path: '/resources/v1/map/thumb/basic-map-small.png', width: 190, height: 116 },
-  reedbank_ruins: { path: '/resources/v1/map/thumb/reedbank-ruins-small.png', width: 180, height: 116 },
-  thicket_maze: { path: '/resources/v1/map/thumb/thicket-maze-small.png', width: 180, height: 116 },
-  four_corners_ruins: { path: '/resources/v1/map/thumb/four-corners-ruins-small.png', width: 180, height: 116 }
-};
 
 export function AgentDuelDeathmatchRecentBattles(props: AgentDuelDeathmatchRecentBattlesProps) {
   const locale = normalizeLocale(props.locale ?? 'zh-CN');
@@ -399,7 +392,7 @@ function BattleRecordRow({
     <article className="dashboard-battle-row battle-record-row">
       <div>
         <BattleRecordTitle row={row} linkComponent={linkComponent} />
-        <BattleDateMapMeta assetBaseUrl={assetBaseUrl} dateFormatter={dateFormatter} row={row} />
+        <BattleDateMapMeta assetBaseUrl={assetBaseUrl} createdAt={row.createdAt} dateFormatter={dateFormatter} mapId={row.mapId} />
       </div>
       <div className="dashboard-battle-meta">
         <MetaFilter active={filters.battleTypes.includes(row.battleType)} label={t(`dashboard.battleType.${row.battleType}`)} onClick={() => onAddFilter({ kind: 'battleType', value: row.battleType })} />
@@ -439,26 +432,6 @@ function renderParticipantName(name: string, href: string | null, own: boolean, 
   if (!href) return <span>{name}</span>;
   const className = `dashboard-battle-name-link${own ? ' is-own' : ''}`;
   return Link ? <Link className={className} href={href}>{name}</Link> : <a className={className} href={href}>{name}</a>;
-}
-
-function BattleDateMapMeta({ assetBaseUrl, dateFormatter, row }: { assetBaseUrl: string; dateFormatter: Intl.DateTimeFormat; row: DeathmatchBattleRecordRow }) {
-  const { t } = useTranslation();
-  const visual = MAP_THUMBNAILS[row.mapId];
-  const mapName = t(`battleMap.names.${row.mapId}`, { defaultValue: row.mapId });
-  return (
-    <p className="battle-date-map-meta">
-      <time dateTime={row.createdAt}>{dateFormatter.format(new Date(row.createdAt))}</time>
-      <span className="battle-date-map-separator" aria-hidden="true">·</span>
-      <span className="battle-map-label" tabIndex={0}>
-        {mapName}
-        <span className="battle-map-tooltip" role="tooltip">
-          {visual ? <img alt="" aria-hidden="true" decoding="async" height={visual.height} loading="lazy" src={joinAssetUrl(assetBaseUrl, visual.path)} width={visual.width} /> : <span className="battle-map-tooltip-placeholder" aria-hidden="true" />}
-          <strong>{mapName}</strong>
-          <span>{t(`battleMap.descriptions.deathmatch.${row.mapId}`, { defaultValue: t('battleMap.previewUnavailable') })}</span>
-        </span>
-      </span>
-    </p>
-  );
 }
 
 function MetaFilter({ active, className, label, onClick }: { active: boolean; className?: string; label: string; onClick(): void }) {
