@@ -829,8 +829,7 @@
   line-height: 28px;
 }
 
-.mode-list-submission-rows,
-.mode-list-rows { border-top: 1px solid var(--duel-line-strong); }
+.mode-list-submission-rows { border-top: 1px solid var(--duel-line-strong); }
 
 .mode-list-submission-row {
   min-height: 52px;
