@@ -39,7 +39,7 @@ function CharacterListContent({
     <div className={rootClassName} style={style}>
       <section className="mode-list-heading" aria-labelledby="deathmode-character-list-title">
         <div>
-          <p className="dashboard-kicker">Deathmatch</p>
+          <p className="dashboard-kicker">deathmatch</p>
           <h1 id="deathmode-character-list-title">{t('dashboard.sidebar.characters')}</h1>
           <p>{t('dashboard.modePage.charactersCopy')}</p>
         </div>
