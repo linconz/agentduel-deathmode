@@ -1,6 +1,6 @@
 {
   "name": "@agentduel/deathmode",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Reusable AgentDuel deathmatch character and battle modules for React applications",
   "license": "Apache-2.0",
   "type": "module",
