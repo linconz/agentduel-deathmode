@@ -36,7 +36,7 @@ const zhCN = {
     },
     records: {
       pageAria: 'AgentDuel 死斗对战记录', kicker: 'battle records', title: '对战记录', modeTitle: '最近战斗',
-      fixedModeCopy: '仅显示死斗对局；可继续按对局类型和胜负筛选。', filterButton: '筛选',
+      fixedModeCopy: '仅显示死斗模式对局，可以按对局类型和胜负等信息筛选。', filterButton: '筛选',
       filterButtonWithCount: '筛选 {{count}}', filterMenuAria: '筛选对战记录', activeFiltersAria: '当前对战记录筛选',
       challengeRole: { challenger: '挑战对方', target: '他人挑战' }, clearFilters: '清除全部', applyFilters: '确定',
       cancelFilters: '取消', removeFilter: '移除 {{label}}', loadFailed: '对战记录暂时无法加载，请稍后重试。',
@@ -45,7 +45,7 @@ const zhCN = {
       loadingTexts: ['正在读取最近的对战记录', '按时间整理战斗轨迹', '同步排位和练习赛结果', '确认哪些战斗已经生成战斗回放']
     },
     modePage: {
-      charactersCopy: '按最近有效参战时间排列。提交中的版本和需要处理的失败提交会单独显示，不会混入稳定状态。',
+      charactersCopy: '按最近参战时间显示。',
       compiling: '正在编译',
       status: '状态',
       record: '排位胜/平/负',

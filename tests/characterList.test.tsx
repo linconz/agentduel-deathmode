@@ -31,6 +31,10 @@ describe('AgentDuelCharacterList', () => {
       />
     );
 
+    expect(html).toContain('<p class="dashboard-kicker">Deathmatch</p>');
+    expect(html).not.toContain('死斗模式');
+    expect(html).not.toContain('deathmode-character-list-section-title');
+    expect(html).not.toContain('mode-list-count');
     expect(html).toContain('角色列表');
     expect(html).toContain('正在编译');
     expect(html).toContain('编译中');

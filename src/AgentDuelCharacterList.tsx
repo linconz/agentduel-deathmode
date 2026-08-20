@@ -39,7 +39,7 @@ function CharacterListContent({
     <div className={rootClassName} style={style}>
       <section className="mode-list-heading" aria-labelledby="deathmode-character-list-title">
         <div>
-          <p className="dashboard-kicker">{t('dashboard.sidebar.deathmatch')}</p>
+          <p className="dashboard-kicker">Deathmatch</p>
           <h1 id="deathmode-character-list-title">{t('dashboard.sidebar.characters')}</h1>
           <p>{t('dashboard.modePage.charactersCopy')}</p>
         </div>
@@ -64,11 +64,7 @@ function CharacterListContent({
           title={t('dashboard.attention.title')}
         />
       ) : null}
-      <section className="mode-list-section" aria-labelledby="deathmode-character-list-section-title">
-        <div className="dashboard-section-heading">
-          <h2 id="deathmode-character-list-section-title">{t('dashboard.sidebar.characters')}</h2>
-          <span className="mode-list-count">{characters.length}</span>
-        </div>
+      <section className="mode-list-section">
         {characters.length === 0 ? (
           <div className="mode-list-empty"><p>{t('dashboard.characters.empty')}</p></div>
         ) : (

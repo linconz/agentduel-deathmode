@@ -822,8 +822,7 @@
   line-height: 24px;
 }
 
-.mode-list-submission-section h2,
-.mode-list-section h2 {
+.mode-list-submission-section h2 {
   margin: 0;
   color: var(--duel-ink);
   font-size: 20px;
@@ -854,7 +853,6 @@
 .mode-list-submission-section.is-problem { padding-left: 14px; border-left: 3px solid var(--duel-danger); }
 .mode-list-submission-row > strong { color: var(--duel-blue); }
 .mode-list-submission-section.is-problem .mode-list-submission-row > strong { color: var(--duel-danger); }
-.mode-list-count { color: var(--duel-subtle); font: 700 12px/18px var(--duel-font-code); }
 .mode-list-empty { min-height: 88px; display: flex; align-items: center; border-top: 1px solid var(--duel-line-strong); border-bottom: 1px solid var(--duel-line); }
 .mode-list-empty p { margin: 0; color: var(--duel-muted); font-size: 14px; line-height: 22px; }
 
