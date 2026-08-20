@@ -1,4 +1,5 @@
 import {
+  AgentDuelAiModelLogoBadge,
   AgentDuelBadgeGallery,
   AgentDuelBattleMatchLabelBadge,
   AgentDuelBattleTypeBadge,
@@ -371,7 +372,7 @@ function VersionCard(props: AgentDuelCharacterOwnerCodeVersionsProps & { locale:
     <article className={`character-detail-version-card${version.is_current ? ' is-current' : ''}`}>
       <div className="character-version-card-header"><strong>{t('characters.detail.versionNo', { version: version.version_no })}</strong>{version.is_current ? <span>{t('characters.detail.currentVersion')}</span> : null}</div>
       <p>{version.change_summary || t('characters.detail.noChangeSummary')}</p>
-      <div className="character-detail-version-meta">{props.renderAiModel?.(version.ai_model, t('characters.detail.unknownModel')) ?? <span>{version.ai_model || t('characters.detail.unknownModel')}</span>}<time>{formatDate(version.completed_at ?? version.created_at, props.locale)}</time></div>
+      <div className="character-detail-version-meta">{props.renderAiModel?.(version.ai_model, t('characters.detail.unknownModel')) ?? <AgentDuelAiModelLogoBadge aiModel={version.ai_model} fallbackLabel={t('characters.detail.unknownModel')} />}<time>{formatDate(version.completed_at ?? version.created_at, props.locale)}</time></div>
       <Button disabled={version.is_current} loading={props.settingVersionId === version.public_id} loadingLabel={t('characters.detail.settingCurrent')} onClick={() => props.onSetCurrentVersion(version.public_id)} size="sm" variant="secondary" width="full">{version.is_current ? t('characters.detail.currentVersion') : t('characters.detail.setCurrentVersion')}</Button>
     </article>
   );
@@ -384,7 +385,7 @@ function GuestVersionContent({ renderAiModel, version }: AgentDuelCharacterGuest
   return (
     <section aria-labelledby={titleId}>
       <SectionHeading id={titleId} title={t('characters.detail.publicVersionTitle')} />
-      <article className="character-detail-public-version"><div><strong>{t('characters.detail.versionNo', { version: version.version_no })}</strong>{renderAiModel?.(version.ai_model, t('characters.detail.unknownModel')) ?? <span>{version.ai_model || t('characters.detail.unknownModel')}</span>}</div><p>{version.change_summary || t('characters.detail.noChangeSummary')}</p></article>
+      <article className="character-detail-public-version"><div><strong>{t('characters.detail.versionNo', { version: version.version_no })}</strong>{renderAiModel?.(version.ai_model, t('characters.detail.unknownModel')) ?? <AgentDuelAiModelLogoBadge aiModel={version.ai_model} fallbackLabel={t('characters.detail.unknownModel')} />}</div><p>{version.change_summary || t('characters.detail.noChangeSummary')}</p></article>
     </section>
   );
 }

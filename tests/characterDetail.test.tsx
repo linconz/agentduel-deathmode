@@ -79,7 +79,7 @@ describe('character detail sections', () => {
   it('caps available versions at ten newest records', () => {
     const versions = Array.from({ length: 12 }, (_, index) => ({
       public_id: `version-${index}`, version_no: index + 1, status: 'compiled' as const, diagnostics: [],
-      ai_model: null, change_summary: `Summary ${index + 1}`, completed_at: null,
+      ai_model: index === 11 ? 'DeepSeek-R1' : null, change_summary: `Summary ${index + 1}`, completed_at: null,
       created_at: `2026-08-${String(index + 1).padStart(2, '0')}T00:00:00.000Z`, is_current: false, is_available: true
     }));
     const html = renderToStaticMarkup(createElement(AgentDuelCharacterOwnerCodeVersions, {
@@ -90,6 +90,7 @@ describe('character detail sections', () => {
     expect(html).toContain('Summary 12');
     expect(html).not.toContain('>Summary 1<');
     expect(html).not.toContain('可用版本');
+    expect(html).toContain('src="https://www.agentduel.app/model/logos/deepseek.svg"');
   });
 
   it('keeps prompt line breaks and fixes only the manual editor at 400px', () => {

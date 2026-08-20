@@ -1,6 +1,6 @@
 {
   "name": "@agentduel/deathmode",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Reusable AgentDuel deathmatch character and battle modules for React applications",
   "license": "Apache-2.0",
   "type": "module",
@@ -57,7 +57,7 @@
     "react-dom": ">=18.2.0"
   },
   "dependencies": {
-    "@agentduel/component": "^0.1.0",
+    "@agentduel/component": "^0.1.6",
     "i18next": "^26.3.2",
     "react-i18next": "^17.0.8"
   },

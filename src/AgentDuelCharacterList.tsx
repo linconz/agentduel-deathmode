@@ -1,3 +1,4 @@
+import { AgentDuelAiModelLogoBadge } from '@agentduel/component';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ButtonLink, DefaultLink } from './components';
@@ -164,7 +165,12 @@ function CharacterRow({
               <span>v{character.active_code.version_no}</span>
               {renderAiModel
                 ? renderAiModel(character.active_code.ai_model, fallbackModelLabel)
-                : <span>{character.active_code.ai_model?.trim() || fallbackModelLabel}</span>}
+                : (
+                  <AgentDuelAiModelLogoBadge
+                    aiModel={character.active_code.ai_model}
+                    fallbackLabel={fallbackModelLabel}
+                  />
+                )}
             </strong>
           ) : <strong>{t('dashboard.codeSource.default')}</strong>}
         </div>
